@@ -263,7 +263,7 @@ var UIController = (function() {
                 `${DOMstrings.inputType}, ${DOMstrings.inputDescr}, ${DOMstrings.inputValue}`
             );
             [].forEach.call(fields, val => val.classList.toggle('red-focus'));
-
+            document.querySelector(DOMstrings.addBtn).classList.toggle('red')
         },
 		getDomStrings: function() {
 			return DOMstrings;
