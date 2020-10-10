@@ -1,4 +1,4 @@
 // Global app controller
 import x from './test';
-
-console.log(`this is = tsdsdest tratatat, ${x}`);
+const num = 23;
+console.log(`this is ${num} = tsdsdest tratatat, ${x}`);
