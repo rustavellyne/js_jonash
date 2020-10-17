@@ -56,14 +56,18 @@ elements.searchResPages.addEventListener('click', e => {
 
 const controlRecipe = async () => {
   const id = window.location.hash.replace('#', '');
+  console.log(id);
   if (!id) {
     return false;
   }
   try {
     state.recipe = new Recipe(id);
+    window.r = state.recipe;
     await state.recipe.getRecipe();
+    state.recipe.parseIngredients();
     state.recipe.calcTime();
     state.recipe.calcServings();
+    console.log(state.recipe.ingredients);
   } catch(e) {
     // statements
     console.log(e);
@@ -71,5 +75,5 @@ const controlRecipe = async () => {
   
 };
 
-window.addEventListener('hashChange', controlRecipe);
+window.addEventListener('hashchange', controlRecipe);
 window.addEventListener('load', controlRecipe);
