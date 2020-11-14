@@ -2,6 +2,7 @@ import Search from './models/Search';
 import Recipe from './models/Recipe';
 import { elements, renderLoader, clearLoader } from  './views/base';
 import * as searchView from './views/SearchView';
+import * as recipeView from './views/recipeView';
 /**
  * Global state of the app
  * - Search object
