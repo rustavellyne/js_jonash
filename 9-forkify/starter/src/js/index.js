@@ -1,5 +1,6 @@
 import Search from './models/Search';
 import Recipe from './models/Recipe';
+import List from './models/List';
 import { elements, renderLoader, clearLoader } from  './views/base';
 import * as searchView from './views/SearchView';
 import * as recipeView from './views/recipeView';
@@ -57,7 +58,6 @@ elements.searchResPages.addEventListener('click', e => {
 
 const controlRecipe = async () => {
   const id = window.location.hash.replace('#', '');
-  console.log(id);
   if (!id) {
     return false;
   }
@@ -74,7 +74,6 @@ const controlRecipe = async () => {
     state.recipe.parseIngredients();
     state.recipe.calcTime();
     state.recipe.calcServings();
-    console.log(state.recipe.ingredients);
 
     // render recipe
     clearLoader();
@@ -88,3 +87,18 @@ const controlRecipe = async () => {
 
 window.addEventListener('hashchange', controlRecipe);
 window.addEventListener('load', controlRecipe);
+
+// handling recipe buttons clicks
+elements.recipe.addEventListener('click', e => {
+  if (e.target.matches('.btn-decrease, .btn-decrease *')) {
+    if(state.recipe.serving > 1) {
+      state.recipe.updateServings('dec');
+      recipeView.updateServingIngredients(state.recipe);
+    }
+    
+  } else if (e.target.matches('.btn-increase, .btn-increase *')) {
+    state.recipe.updateServings('inc');
+    recipeView.updateServingIngredients(state.recipe);
+  }
+});
+
