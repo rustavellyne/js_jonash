@@ -23,7 +23,7 @@ export default class Recipe {
   calcTime () {
     const numIngr = this.ingredients.length;
     const periods = Math.ceil(numIngr / 3);
-    const time = periods * 15;
+    this.time = periods * 15;
   }
 
   calcServings () {
@@ -33,11 +33,12 @@ export default class Recipe {
   parseIngredients () {
     const unitLong = ['tablespoons', 'tablespoon', 'ounces', 'ounce', 'teaspoons', 'teaspoon', 'cups', 'pounds'];
     const unitShorts = ['tbsp', 'tbsp', 'oz', 'oz', 'tsp', 'tsp', 'cup', 'pound'];
+    const units = [...unitShorts, 'kg', 'g'];
 
     const newIngridients = this.ingredients.map(el => {
       let ingredient = el.toLowerCase();
       unitLong.forEach((unit, i) => {
-        ingredient = ingredient.replace(unit, unitShorts[i]);
+        ingredient = ingredient.replace(unit, units[i]);
       })
 
       ingredient = ingredient.replace(/ *\([^)]*\) */g, ' ');

@@ -61,6 +61,12 @@ const controlRecipe = async () => {
   if (!id) {
     return false;
   }
+  renderLoader(elements.recipe);
+  if(state.search) {
+    searchView.highlightSelected(id);
+  }
+  
+  recipeView.clearRecipe();
   try {
     state.recipe = new Recipe(id);
     window.r = state.recipe;
@@ -69,6 +75,10 @@ const controlRecipe = async () => {
     state.recipe.calcTime();
     state.recipe.calcServings();
     console.log(state.recipe.ingredients);
+
+    // render recipe
+    clearLoader();
+    recipeView.renderRecipe(state.recipe);
   } catch(e) {
     // statements
     console.log(e);
